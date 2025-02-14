@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramzan Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
+        .countdown-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Ramzan Countdown</h1>
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const today = new Date();
+            const currentYear = today.getFullYear();
+            const ramzanStart = new Date(2025, 2, 2, 0, 0, 0).getTime();
+            const now = today.getTime();
+            const timeLeft = ramzanStart - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML =
+                    `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+            } else {
+                document.getElementById("countdown").innerHTML = "Ramzan Mubarak!";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
